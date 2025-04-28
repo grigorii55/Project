@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koki — Декоративная косметика</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --accent-color: #d2b48c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #333;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      margin: 0;
+      color: var(--accent-color);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent-color);
+    }
+
+    .menu-icon {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-icon div {
+      width: 30px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background-color: #000;
+      width: 100%;
+      text-align: center;
+      animation: slideIn 0.3s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .mobile-nav a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      font-weight: bold;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--accent-color);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .menu-icon {
+        display: flex;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+
+      .hero {
+        padding: 120px 20px;
+      }
+
+      .hero h2 {
+        font-size: 20px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+    }
+
+    .hero {
+      background: linear-gradient(to right, #ba5df0, #e8bca2);
+      color: #fff;
+      padding: 220px 20px;
+      text-align: center;
+      max-width: 100%;
+      overflow: hidden; 
+    }
+
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: auto;
+      opacity: 0.9;
+    }
+
+    .section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h3 {
+      font-size: 28px;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .card h4 {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #222;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+      flex-grow: 1;
+    }
+
+    .read-button {
+      display: inline-block;
+      margin-top: auto;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    footer {
+      background-color: #000;
+      color: #e0d9d9;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    #subscribe form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    #subscribe input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #subscribe button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .menu-icon.open div:nth-child(1) {
+      transform: rotate(45deg);
+      position: relative;
+      top: 7px;
+    }
+
+    .menu-icon.open div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-icon.open div:nth-child(3) {
+      transform: rotate(-45deg);
+      position: relative;
+      top: -7px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>KOKI BEAUTY</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="recommendations.html">Рекомендации</a>
+      <a href="news.html">Новости</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <div class="mobile-nav">
+    <a href="index.html">Главная</a>
+    <a href="recommendations.html">Рекомендации</a>
+    <a href="news.html">Новости</a>
+    <a href="contacts.html">Контакты</a>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const mobileNav = document.querySelector('.mobile-nav');
+      const menuIcon = document.querySelector('.menu-icon');
+      mobileNav.style.display = mobileNav.style.display === 'block' ? 'none' : 'block';
+      menuIcon.classList.toggle('open');
+    }
+  </script>
+  <div class="hero" style="background: linear-gradient(to right, #ba5df0, #e8bca2); color: #fff; padding: 220px 20px; text-align: center;">
+    <h2 data-aos="fade-up" style="font-family: 'Playfair Display', serif; font-size: 64px; font-weight: bold; text-transform: uppercase; text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6); line-height: 1.2;">
+      Твоя косметика — твоя история
+    </h2>
+    <p data-aos="fade-up" data-aos-delay="200" style="font-size: 24px; max-width: 900px; margin: auto; font-weight: 300; line-height: 1.6; opacity: 0.9;">
+      Koki — это проект о декоративной косметике, который поможет тебе найти идеальные средства, освоить тренды макияжа и научиться подбирать продукты под себя.
+    </p>
+  </div>
+
+  <section class="section">
+    <h3 data-aos="fade-up">Новинки недели</h3>
+    <div class="cards">
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <div class="card-meta">
+          <span>Автор: Карина И.</span>
+          <span>26 апр, 14:30</span>
+        </div>
+        <img src="Новости/Новость 1-2.jpg" alt="Увлажняющая помада ShineLuxe" />
+        <h4>Chanel Clairvoyancee</h4>
+        <p>Chanel представили свою осенне-зимнюю коллекцию декоративной косметики...</p>
+        <a href="Новость 1.html" class="read-button">Читать</a>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <div class="card-meta">
+          <span>Автор: Карина И.</span>
+          <span>27 апр, 11:00</span>
+        </div>
+        <img src="Новости/Новость 2-1.jpg" alt="Палетка теней ColorDrama" />
+        <h4>Новая коллекция декоративной косметики</h4>
+        <p>Бренд Pleasing, основанный Гарри Стайлсом, выпустил лимитированную серию декоративной косметики...</p>
+        <a href="Новость 2.htmll" class="read-button">Читать</a>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="300">
+        <div class="card-meta">
+          <span>Автор: Карина И.</span>
+          <span>29 апр, 15:15</span>
+        </div>
+        <img src="Новости/Новость 3-2.webp" alt="Тональный крем VelvetSkin" />
+        <h4>Топ-7 лучшей российской декоративной косметики</h4>
+        <p>Обзор от Косметиста представляет семь популярных российских продуктов декоративной косметики...</p>
+        <a href="Новость 3.html" class="read-button">Читать</a>
+      </div>
+</section>
+  <!-- Форма подписки -->
+  <section class="section" id="subscribe">
+    <h3>Подпишись на новости</h3>
+    <form action="/submit_form" method="POST">
+      <input type="email" name="email" placeholder="Введите ваш email" required>
+      <button type="submit">Подписаться</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Koki. Все права защищены.</p>
+    <a href="privacy-policy.html" style="color: #e0d9d9; text-decoration: none;">Политика конфиденциальности</a>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000 });
+
+    // Функция для переключения мобильного меню
+    function toggleMenu() {
+      const mobileNav = document.querySelector('.mobile-nav');
+      mobileNav.style.display = (mobileNav.style.display === 'block') ? 'none' : 'block';
+    }
+  </script>
+</body>
+</html>

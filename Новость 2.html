@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koki — Декоративная косметика</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --accent-color: #d2b48c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #333;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      margin: 0;
+      color: var(--accent-color);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent-color);
+    }
+
+    .menu-icon {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-icon div {
+      width: 30px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background-color: #000;
+      width: 100%;
+      text-align: center;
+      animation: slideIn 0.3s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .mobile-nav a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      font-weight: bold;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--accent-color);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .menu-icon {
+        display: flex;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+
+      .hero {
+        padding: 120px 20px;
+      }
+
+      .hero h2 {
+        font-size: 20px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+    }
+
+    .hero {
+      background: linear-gradient(to right, #ba5df0, #e8bca2);
+      color: #fff;
+      padding: 220px 20px;
+      text-align: center;
+      max-width: 100%;
+      overflow: hidden; 
+    }
+
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: auto;
+      opacity: 0.9;
+    }
+
+    .section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h3 {
+      font-size: 28px;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .card h4 {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #222;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+      flex-grow: 1;
+    }
+
+    .read-button {
+      display: inline-block;
+      margin-top: auto;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    footer {
+      background-color: #000;
+      color: #e0d9d9;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    #subscribe form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    #subscribe input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #subscribe button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .menu-icon.open div:nth-child(1) {
+      transform: rotate(45deg);
+      position: relative;
+      top: 7px;
+    }
+
+    .menu-icon.open div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-icon.open div:nth-child(3) {
+      transform: rotate(-45deg);
+      position: relative;
+      top: -7px;
+    }
+.back-link {
+    font-size: 16px;
+    color: var(--accent-color);
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: color 0.3s ease;
+  }
+
+  .back-link:hover {
+    color: #000;
+  }
+
+  .section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+
+  .section h2 {
+    font-size: 28px;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--accent-color);
+  }
+
+  .section p {
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 20px;
+  }
+
+  .section ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .section ul li {
+    margin-bottom: 10px;
+  }
+  .section img {
+width: 60%;
+height: auto;
+border-radius: 8px;
+margin-bottom: 20px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+  footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+  }
+  :root {
+    --accent-color: #d2b48c;
+    --main-bg-color: #f7f7f7;
+    --text-color: #333;
+    --comment-bg-color: #fff;
+    --comment-border-color: #ddd;
+    --button-bg-color: #4CAF50;
+    --button-text-color: #fff;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+  }
+
+  header {
+    background-color: #000;
+    color: #fff;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin: 0;
+    color: var(--accent-color);
+  }
+
+  .section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+
+  .section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+
+  .comments-section {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: var(--comment-bg-color);
+    padding: 20px;
+    border: 1px solid var(--comment-border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .comments-section h2 {
+    text-align: center;
+    color: var(--accent-color);
+  }
+
+  .comments-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .comments-section textarea, .comments-section input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid var(--comment-border-color);
+    border-radius: 5px;
+    resize: vertical;
+    width: 100%;
+  }
+
+  .comments-section button {
+    padding: 10px 20px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+
+  .comments-section button:hover {
+    background-color: #45a049;
+  }
+
+  .comment {
+    background-color: var(--comment-bg-color);
+    border: 1px solid var(--comment-border-color);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+
+  .comment p {
+    margin: 0;
+    color: var(--text-color);
+  }
+
+  footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+  }
+
+</style>
+</head>
+<body>
+  <header>
+    <h1>KOKI BEAUTY</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="recommendations.html">Рекомендации</a>
+      <a href="news.html">Новости</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <div class="mobile-nav">
+    <a href="index.html">Главная</a>
+    <a href="recommendations.html">Рекомендации</a>
+    <a href="news.html">Новости</a>
+    <a href="contacts.html">Контакты</a>
+  </div>
+
+  <div class="menu-icon" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</header>
+
+<div class="mobile-nav">
+  <a href="index.html">Главная</a>
+  <a href="recommendations.html">Рекомендации</a>
+  <a href="news.html">Новости</a>
+  <a href="contacts.html">Контакты</a>
+</div>
+
+<script>
+    function toggleMenu() {
+      const mobileNav = document.querySelector('.mobile-nav');
+      const menuIcon = document.querySelector('.menu-icon');
+      mobileNav.style.display = mobileNav.style.display === 'block' ? 'none' : 'block';
+      menuIcon.classList.toggle('open');
+    }
+  </script>
+  <title>Новая коллекция декоративной косметики от Гарри Стайлса</title>
+</head>
+<body>
+    <article>
+        <section>
+            <h1>Новая коллекция декоративной косметики от Гарри Стайлса</h1>
+            <p><strong>Бренд Pleasing</strong>, основанный Гарри Стайлсом, выпустил лимитированную серию декоративной косметики.</p>
+            <p>В коллекции представлены многофункциональные продукты в виде пудры и крема, а также новые оттенки лаков для ногтей.</p>
+            <p>Фотографии коллекции и подробности можно найти в статье.</p>
+        </section>
+        <section>
+            <h2>Фотографии</h2>
+            <img src="Новости/Новость 2-1.jpg" alt="Фото коллекции Pleasing от Гарри Стайлса" width="600" height="400">
+            <img src="Новости/Новость 2-2.jpg" alt="Фото новых продуктов Pleasing от Гарри Стайлса" width="600" height="400">
+        </section>
+    </article>
+</body>
+<section class="comments-section">
+    <h2>Комментарии</h2>
+    <form id="commentForm">
+      <input id="userName" type="text" placeholder="Ваше имя" required />
+      <textarea id="commentText" placeholder="Напишите ваш комментарий..." rows="4" required></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+
+    <div id="commentsContainer">
+    </div>
+  </section>
+
+  <script>
+    const commentForm = document.getElementById('commentForm');
+    const userName = document.getElementById('userName');
+    const commentText = document.getElementById('commentText');
+    const commentsContainer = document.getElementById('commentsContainer');
+    const pageKey = window.location.pathname;
+    let comments = JSON.parse(localStorage.getItem(pageKey)) || [];
+    function renderComments() {
+      commentsContainer.innerHTML = '';
+      comments.forEach((comment, index) => {
+        const commentElement = document.createElement('div');
+        commentElement.classList.add('comment');
+        commentElement.innerHTML = `
+          <p><strong>${comment.name}:</strong> ${comment.text}</p>
+        `;
+        commentsContainer.appendChild(commentElement);
+      });
+    }
+    function saveComments() {
+      localStorage.setItem(pageKey, JSON.stringify(comments));
+    }
+    commentForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = userName.value.trim();
+      const text = commentText.value.trim();
+
+      if (name && text) {
+        comments.push({ name, text });
+        saveComments();
+        userName.value = '';
+        commentText.value = '';
+        renderComments();
+      }
+    });
+    renderComments();
+  </script>
+  <footer>
+    <p>&copy; 2025 Koki. Все права защищены.</p>
+  </footer>
+</body>
+</html>

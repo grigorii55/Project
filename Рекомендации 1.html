@@ -1,0 +1,652 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Koki — Декоративная косметика</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --accent-color: #d2b48c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #333;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      margin: 0;
+      color: var(--accent-color);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent-color);
+    }
+
+    .menu-icon {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-icon div {
+      width: 30px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background-color: #000;
+      width: 100%;
+      text-align: center;
+      animation: slideIn 0.3s ease-in-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .mobile-nav a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      font-weight: bold;
+    }
+
+    .mobile-nav a:hover {
+      color: var(--accent-color);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .menu-icon {
+        display: flex;
+      }
+
+      .mobile-nav {
+        display: block;
+      }
+
+      .hero {
+        padding: 120px 20px;
+      }
+
+      .hero h2 {
+        font-size: 20px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+    }
+
+    .hero {
+      background: linear-gradient(to right, #ba5df0, #e8bca2);
+      color: #fff;
+      padding: 220px 20px;
+      text-align: center;
+      max-width: 100%;
+      overflow: hidden; 
+    }
+
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 800px;
+      margin: auto;
+      opacity: 0.9;
+    }
+
+    .section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section h3 {
+      font-size: 28px;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    .card h4 {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #222;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #555;
+      flex-grow: 1;
+    }
+
+    .read-button {
+      display: inline-block;
+      margin-top: auto;
+      padding: 10px 20px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    footer {
+      background-color: #000;
+      color: #e0d9d9;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    #subscribe form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    #subscribe input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    #subscribe button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .menu-icon.open div:nth-child(1) {
+      transform: rotate(45deg);
+      position: relative;
+      top: 7px;
+    }
+
+    .menu-icon.open div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-icon.open div:nth-child(3) {
+      transform: rotate(-45deg);
+      position: relative;
+      top: -7px;
+    }
+.back-link {
+    font-size: 16px;
+    color: var(--accent-color);
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: color 0.3s ease;
+  }
+
+  .back-link:hover {
+    color: #000;
+  }
+
+  .section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+
+  .section h2 {
+    font-size: 28px;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--accent-color);
+  }
+
+  .section p {
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 20px;
+  }
+
+  .section ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .section ul li {
+    margin-bottom: 10px;
+  }
+  .section img {
+width: 60%;
+height: auto;
+border-radius: 8px;
+margin-bottom: 20px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+  footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+  }
+  :root {
+    --accent-color: #d2b48c;
+    --main-bg-color: #f7f7f7;
+    --text-color: #333;
+    --comment-bg-color: #fff;
+    --comment-border-color: #ddd;
+    --button-bg-color: #4CAF50;
+    --button-text-color: #fff;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+  }
+
+  header {
+    background-color: #000;
+    color: #fff;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin: 0;
+    color: var(--accent-color);
+  }
+
+  .section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+
+  .section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 40px;
+  }
+
+  .comments-section {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: var(--comment-bg-color);
+    padding: 20px;
+    border: 1px solid var(--comment-border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .comments-section h2 {
+    text-align: center;
+    color: var(--accent-color);
+  }
+
+  .comments-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .comments-section textarea, .comments-section input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid var(--comment-border-color);
+    border-radius: 5px;
+    resize: vertical;
+    width: 100%;
+  }
+
+  .comments-section button {
+    padding: 10px 20px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+
+  .comments-section button:hover {
+    background-color: #45a049;
+  }
+
+  .comment {
+    background-color: var(--comment-bg-color);
+    border: 1px solid var(--comment-border-color);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+  }
+
+  .comment p {
+    margin: 0;
+    color: var(--text-color);
+  }
+
+  footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+  }
+
+</style>
+</head>
+<body>
+  <header>
+    <h1>KOKI BEAUTY</h1>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="recommendations.html">Рекомендации</a>
+      <a href="news.html">Новости</a>
+      <a href="contacts.html">Контакты</a>
+    </nav>
+
+    <div class="menu-icon" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+
+  <div class="mobile-nav">
+    <a href="index.html">Главная</a>
+    <a href="recommendations.html">Рекомендации</a>
+    <a href="news.html">Новости</a>
+    <a href="contacts.html">Контакты</a>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      const mobileNav = document.querySelector('.mobile-nav');
+      const menuIcon = document.querySelector('.menu-icon');
+      mobileNav.style.display = mobileNav.style.display === 'block' ? 'none' : 'block';
+      menuIcon.classList.toggle('open');
+    }
+  </script>
+  <section class="section">
+    <p>
+    Декоративная косметика – что это? Советы по выбору и использованию<br>
+    <img src="Рекоммендации/statia1-1.jpg" alt="Фото продукции Clairvoyance от Chanel" width="600" height="400">
+<br>
+Для каждой девушки важно выглядеть стильно, ощущать свою привлекательность. Это основа уверенности в себе, в своей красоте, ухоженности и неотразимости. Чтобы образ в целом получился гармоничным, нужно удачно скомбинировать одежду с прической и макияжем.<br>
+Современная бьюти-индустрия предлагает массу декоративных средств, которые способны творить «чудеса»: скрывать несовершенства кожи, подчеркивать или визуально менять форму глаз, губ, выделять скулы.<br>
+В дневном мейкапе можно обойтись тоном, тушью для ресниц и блеском. Если нужно выглядеть на все 100% на корпоративной вечеринке, используйте более смелые оттенки теней, губной помады. В деловом образе уместна лаконичность. Безупречный тон с акцентом на глаза или губы поможет создать нужное впечатление. <br>
+Все что нужно для эффектного мейка вы найдете на страницах каталога TOTIS Pharma. В наличии качественная профессиональная косметика для макияжа проверенных европейских и американских марок, которую используют своей работе опытные стилисты.<br>
+<img src="Рекоммендации/statia1-2.jpg" alt="Фото продукции Clairvoyance от Chanel" width="600" height="400">
+<br>
+Что такое декоративная косметика<br>
+Декоративная косметика – это отдельная категория бьюти-продукции. Такие средства призваны улучшить внешний вид, опираясь на веяния моды и личные вкусовые предпочтения. При правильном нанесении средства могут подчеркнуть достоинства внешности и скрыть недочеты.<br>
+Мейкап может выполнять разные функции: <br>
+подчеркивать естественную красоту;<br>
+визуально корректировать недостатки кожи, черты лица, посадку и разрез глаз;<br>
+скрывать возраст, делая образ моложе и свежее.<br>
+Преимущества профессиональной декоративной косметики<br>
+Профессиональная косметика в отличие от продукции масс-маркет, имеет ряд преимуществ:<br>
+Качество и стойкость. Средства разрабатываются с применением инновационных технологий с использованием качественных ингредиентов. Поэтому макияж держится дольше и при этом смотрится натуральнее.<br>
+Насыщенность пигментов. Профессиональная продукция отличается более яркими цветами, с ее помощью проще выполнить эффектный макияж.<br>
+Безопасность и уход. Формулы бьюти-средств отличаются безопасностью, они не содержат веществ, которые могут быть потенциально опасными для здоровья. Часто профессиональная декоративная косметика обладает ухаживающими свойствами.<br>
+Профессиональные средства разрабатываются для стилистов, но могут применяться в домашних условиях. <br>
+Как подобрать косметику для макияжа<br>
+При выборе косметики нужно учитывать следующие моменты:<br>
+Определите цель и назначение макияжа. Решите, на чем вы хотите сделать акцент: на губах или на глазах. Это будет дневной, вечерний или тематический мейк?<br>
+Подбирайте оттенки декоративных средств с учетом цвета волос, кожи, радужки глаз. Для холодного цветотипа подойдет косметика с холодным подтоном: тени синего, фиолетового, серого цвета. Если внешний вид относится к теплому цветотипу, выбирайте золотистые, коричневые, песочные, бежевые оттенки теней.<br>
+При выборе карандашей для контура учитывайте цвет и форму глаз. Оптимальный вариант – оттенки, которые отличаются на 1-2 тона от естественного цвета.<br>
+Перед покупкой тона нужно учесть тип кожи, ее особенности, натуральный цвет.<br>
+При этом не бойтесь экспериментировать. Сегодня в моде неожиданные сочетания. <br>
+<br>
+<img src="Рекоммендации/statia1-3.jpg" alt="Фото продукции Clairvoyance от Chanel" width="600" height="400">
+Как правильно пользоваться декоративной косметикой<br>
+Перед выполнением макияжа нужно тщательно очистить кожу, нанести увлажняющую сыворотку или легкий дневной крем. Если маскировка недостатков кожи не нужна, можно использовать легкий тональный крем или основу, ВВ-продукт. <br>
+Старайтесь использовать минимальное количество тона, чтобы не получить эффект маски. После каждого использования необходимо мыть спонжи, кисти и прочие бьюти-инструменты. Средства, у которых вышел срок годности, применять нельзя.<br>
+Виды косметики для ежедневного макияжа<br>
+У каждой девушки свой арсенал косметических средств. При этом базовый набор декоративной косметики примерно такой:<br>
+Тональный крем, корректор, консилер, база под макияж – это средства, которые предназначены для выравнивания тона, маскировки недостатков и подготовки кожи к нанесению декоративной косметики. <br>
+Румяна. Это средство придает лицу свежесть и скульптурность после выравнивания тона. С его помощью можно подчеркнуть скулы.<br>
+Пудра. Такая косметика помогает зафиксировать макияж и снять жирный блеск, обеспечивая матовый финиш.<br>
+Тени для век. Используются при выполнении макияжа глаз для придания выразительности.<br>
+Тушь – нужна для придания объема, длины и цвета ресницам.<br>
+Губная помада, блеск. Назначение таких средств – увлажнить кожу губ и придать желаемый оттенок.<br>
+Не будут лишними в косметичке следующие бьюти-средства:<br>
+Карандаш или подводка для глаз – с их помощью можно нарисовать стрелки, заполнить межресничное пространство, скорректировать форму и посадку глаз.<br>
+Карандаши, помада или тени для бровей – придают желаемую форму и цвет волоскам.<br>
+Хайлайтер – с его помощью можно подчеркнуть высокие точки лица и придать сияние коже.<br>
+Фиксатор макияжа – это бьюти-продукт в виде спрея, который помогает продлить стойкость мейка.<br>
+Кисти и аппликаторы – с помощью качественных инструментов наносить косметику проще, легче выполнять растушевку.<br>
+При выборе средств нужно опираться на свои предпочтения, особенности и недостатки кожи.<br>
+Краткий обзор продуктов для макияжа от Maria Galland Paris<br>
+В онлайн-каталоге TOTIS Pharma представлена профессиональная бьюти-продукция, которая идеально подходит для ежедневного мейка. Профессиональные стилисты рекомендуют подчеркнуть привлекательность и естественную красоту кожи именно средствами французского бренда Maria Galland Paris. Поскольку они не просто подчеркивают, но и содержат качественные ухаживающие природные комплексы, в том числе:<br>
+Увлажняющие ингредиенты<br>
+Гиалуроновая кислота/гиалуроновые микросферы - обеспечивают длительное и глубокое увлажнение + разглаживают морщины, улучшают упругость, эластичность и гладкость кожи.<br>
+Экстракт дрожжей - разглаживает морщины и оптимально увлажняет кожу.<br>
+Комплекс из экстракта красных морских водорослей "Energy Booster" - мгновенно и надолго увлажняет, минимизирует признаки усталости.<br>
+Экстракт коры магнолии - гидратирует кожу и придает упругость, устраняет покраснения.<br>
+Экстракт семян кунжута - предотвращает обезвоживание и смягчает кожу.<br>
+Масло марулы - увлажняет и питает кожу.<br>
+Питательные компоненты<br>
+Экстракт шиповника - обеспечивает необходимое питание, успокаивает кожу и дарит комфортные ощущения.<br>
+Масло ши и комплекс ценных растительных масел - придают коже мягкость и шелковистость, глубоко питают, предотвращают обезвоживание и шелушение.<br>
+Карнаубский воск и касторовое масло - бережно смягчают, насыщают липидами и питают кожу.<br>
+Антиоксиданты<br>
+Комплекс витаминов Е, С и А - помогает восстанавливать повреждения кожи, защищает от разрушительного воздействия свободных радикалов.<br>
+Пудра из полинезийского жемчуга - защищает от оксидативного стресса, способствует быстрому восстановлению клеток кожи.<br>
+Кроме того, декоративная косметика (в частности тушь) бренда содержит трипептиды, которые усиливают рост ресниц, утолщают их, добавляют густоты и удлиняют.<br>
+Эксперты лаборатории косметики Maria Galland Paris понимают, насколько важными и фундаментальными продуктами для четкого мейка являются тональные средства. Поэтому разработали индивидуализированные формулы, которые через уход создают невероятную и качественную базу для желаемого wow-образа на каждый день!<br>
+<img src="Рекоммендации/statia1-4.jpg" alt="Фото продукции Clairvoyance от Chanel" width="600" height="400">
+<br>
+810 Youthful Perfection Skincare Foundation (3 оттенка) - омолаживающая тональная основа, легкий лосьон с SPF-защитой.<br>
+Это ваш идеальный "match", если вам нужно профессионально скрыть возрастные изменения/недостатки кожи, сделать равномерный тон и, в то же время, добавить естественного роскошного сияния и блеска. Пигментированный легкий продукт, который не будет скапливаться в складках и забивать поры в течение дня.<br>
+812 Radiance Skincare Foundation (3 оттенка) - легкий, увлажняющий, тональный флюид для сухой и комбинированной кожи.<br>
+Топ-продукт для обезвоженной, сухой кожи, которой не хватает увлажнения и здорового блеска. Уникальная и комфортная жидкая формула, которая мгновенно сливается с тоном поверхности и не ощущается на коже. Продукт обеспечивает ультра естественный сияющий финиш и исключительно комфортные ощущения. <br>
+814 Velvet Skincare Foundation (3 оттенка) - невесомый профессиональный флюид для совершенствования комбинированной/жирной кожи, который придает матовый финиш. <br>
+Удачное сочетание экстракта африканского белого дерева и семян хлопка для обеспечения эффекта матовости и оптимального увлажнения в течение дня, без масляного блеска в конце дня.<br>
+818 Smoothing Skincare Concealer (3 оттенка) - кремовый консилер для разглаживания кожи с пудровым финишем. <br>
+Консилер имеет четкий и удобный аппликатор, кремовую текстуру для абсолютно комфортного нанесения (тушевания) продукта. Плотно и качественно перекрывает недостатки кожи (темные круги, покраснения, прыщи) имеет увлажняющий эффект и SPF-фильтры в составе. <br>
+С идеальной базой разобрались, теперь перейдем к декоративным продуктам, которые помогут подчеркнуть, добавить цвета вашим неповторимым чертам лица. <br>
+826 Perfect Glow Illuminating Duo<br>
+Мерцающая розовая пудра-хайлайтер. Она осветляет цвет лица, подчеркивает нос, подбородок, скулы. Бьюти-продукт придает коже упругость и шелковистость. Средство содержит витамины Е и С, которые обеспечивают защиту от окислительного стресса. Пудра подходит для кожи любого типа.<br>
+526 Infinite Eyeshadow Stylo<br>
+Тени-карандаш для век. Это стойкий бьюти-продукт формата «2 в 1», который можно использовать для придания выразительности взгляду. Отличается насыщенным оттенком, имеет кремовую текстуру. Карандаш легко наносится, прост в применении.<br>
+850 Infin. Eyebrow Pencil<br>
+Водостойкий автоматический карандаш для бровей, который помогает увеличить плотность волосков. Обладает увлажняющими и питательными свойствами. Содержит касторовое, масло ши, карнаубский воск.<br>
+<img src="Рекоммендации/statia1-5.jpg" alt="Фото продукции Clairvoyance от Chanel" width="600" height="400">
+<br>
+860 Ultimate Caring Mascara Base<br>
+Бьюти-продукт, который следует наносить перед тушью. Придает ресницам дополнительную длину и объем. Содержит трипептиды для удлинения, драгоценный воск, растительный экстракт для питания и увлажнения, пантенол. У средства приятная текстура, продукт придает чарующий изгиб. <br>
+502 Infinite Stylo Lipstick<br>
+Стойкая губная помада с бесконечным сиянием и легкой текстурой. Обогащена экстрактом шиповника для комфорта и питания губ. Содержит высокую концентрацию пигмента. Обеспечивает точное нанесение по контуру благодаря треугольной форме стика.<br>
+<img src="Рекоммендации/statia1-6.jpg" alt="Фото продукции Clairvoyance от Chanel" width="600" height="400">
+<br>
+Популярные вопросы <br>
+Как подобрать косметику для макияжа? <br>
+При выборе декоративных средств нужно учитывать тип кожи и ее состояние, возрастную категорию. Важно обращать внимание на состав косметики, срок годности, кто производитель. Средства должны хорошо сочетаться с природным оттенком кожи, волос, цветом глаз.<br>
+Как правильно пользоваться декоративной косметикой? <br>
+Перед нанесением мейкапа нужно выполнить этап очищения кожи, увлажнения. Не следует использовать большое количество декоративной косметики: все должно быть в меру. Для стойкости на завершающем этапе можно закрепить макияж специальным спреем или пудрой.<br>
+Преимущества профессиональной декоративной косметики<br>
+Профессиональная косметика отличается высоким качеством ингредиентов, сбалансированными формулами, стойкостью. Кроме декоративного эффекта, такая бьюти-продукция выполняет защитные функции, обеспечивает уход в течение дня.<br>
+<br>
+
+    </p>
+  </section>
+  <section class="comments-section">
+    <h2>Комментарии</h2>
+    <form id="commentForm">
+      <input id="userName" type="text" placeholder="Ваше имя" required />
+      <textarea id="commentText" placeholder="Напишите ваш комментарий..." rows="4" required></textarea>
+      <button type="submit">Отправить</button>
+    </form>
+
+    <div id="commentsContainer">
+    </div>
+  </section>
+
+  <script>
+    const commentForm = document.getElementById('commentForm');
+    const userName = document.getElementById('userName');
+    const commentText = document.getElementById('commentText');
+    const commentsContainer = document.getElementById('commentsContainer');
+    const pageKey = window.location.pathname;
+    let comments = JSON.parse(localStorage.getItem(pageKey)) || [];
+    function renderComments() {
+      commentsContainer.innerHTML = '';
+      comments.forEach((comment, index) => {
+        const commentElement = document.createElement('div');
+        commentElement.classList.add('comment');
+        commentElement.innerHTML = `
+          <p><strong>${comment.name}:</strong> ${comment.text}</p>
+        `;
+        commentsContainer.appendChild(commentElement);
+      });
+    }
+    function saveComments() {
+      localStorage.setItem(pageKey, JSON.stringify(comments));
+    }
+    commentForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = userName.value.trim();
+      const text = commentText.value.trim();
+
+      if (name && text) {
+        comments.push({ name, text });
+        saveComments();
+        userName.value = '';
+        commentText.value = '';
+        renderComments();
+      }
+    });
+    renderComments();
+  </script>
+  <footer>
+    <p>&copy; 2025 Koki. Все права защищены.</p>
+  </footer>
+</body>
+</html>
+
